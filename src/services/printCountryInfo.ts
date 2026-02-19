@@ -1,5 +1,5 @@
 import { color } from "./formatUtils.js";
-import { type Country } from "./destinationService.js";
+import { type Country } from "../types/types.js";
 
 // Print country information with colors
 export const printCountryInfo = (countryInfo: Country) => {
