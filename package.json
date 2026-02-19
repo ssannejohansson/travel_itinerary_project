@@ -1,33 +1,33 @@
 {
-  "name": "travel_itinerary_project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ssannejohansson/travel_itinerary_project.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/ssannejohansson/travel_itinerary_project/issues"
-  },
-  "homepage": "https://github.com/ssannejohansson/travel_itinerary_project#readme",
-  "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "eslint": "^9.39.2",
-    "eslint-config-prettier": "^10.1.8",
-    "globals": "^17.3.0",
-    "jiti": "^2.6.1",
-    "prettier": "^3.8.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.55.0"
-  }
+	"name": "travel_itinerary_project",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "eslint"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ssannejohansson/travel_itinerary_project.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/ssannejohansson/travel_itinerary_project/issues"
+	},
+	"homepage": "https://github.com/ssannejohansson/travel_itinerary_project#readme",
+	"devDependencies": {
+		"@eslint/js": "^9.39.2",
+		"eslint": "^9.39.2",
+		"eslint-config-prettier": "^10.1.8",
+		"globals": "^17.3.0",
+		"jiti": "^2.6.1",
+		"prettier": "^3.8.1",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.55.0"
+	}
 }
