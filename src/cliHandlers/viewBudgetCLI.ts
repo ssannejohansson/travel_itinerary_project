@@ -1,8 +1,42 @@
-import { mainMenu } from "../mainCli.js";
+import inquirer from "inquirer";
+import type { Trip, Activity } from "../types/types.js";
+import {
+  calculateTotalCost,
+  getHighCostActivities,
+} from "../services/budgetManager.js";
 
-export const viewBudgetMenu = (user: Trip) => {
-	console.log("viewBudgetMenu");
 
-	// Go back to main menu
-	mainMenu();
+export const viewBudgetMenu = async (trip: Trip): Promise<void> => {
+  const totalCost = calculateTotalCost(trip);
+  console.log(`Total cost: ${totalCost} kr`);
+
+  const { highlight } = await inquirer.prompt([
+    {
+      name: "highlight",
+      type: "confirm",
+      message: "Do you want to highlight expensive activities?",
+    },
+  ]);
+
+  if (!highlight) return;
+
+  const { threshold } = await inquirer.prompt([
+    {
+      name: "threshold",
+      type: "number",
+      message: "What's your threshold?",
+    },
+  ]);
+
+  const expensive = getHighCostActivities(trip.activities, threshold);
+
+  if (expensive.length === 0) {
+    console.log("No activities exceed your threshold");
+    return;
+  }
+
+  console.log("High-cost activities:");
+  expensive.forEach((activity: Activity) => {
+    console.log(`${activity.name} - ${activity.activityCost}`);
+  });
 };
