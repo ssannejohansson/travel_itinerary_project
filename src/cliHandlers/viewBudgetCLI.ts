@@ -4,6 +4,7 @@ import {
   calculateTotalCost,
   getHighCostActivities,
 } from "../services/budgetManager.js";
+import { mainMenu } from "../mainCli.js";
 
 
 export const viewBudgetMenu = async (trip: Trip): Promise<void> => {
@@ -18,7 +19,9 @@ export const viewBudgetMenu = async (trip: Trip): Promise<void> => {
     },
   ]);
 
-  if (!highlight) return;
+  if (!highlight) {
+	return await mainMenu()
+  }
 
   const { threshold } = await inquirer.prompt([
     {
@@ -32,11 +35,14 @@ export const viewBudgetMenu = async (trip: Trip): Promise<void> => {
 
   if (expensive.length === 0) {
     console.log("No activities exceed your threshold");
-    return;
+    return await mainMenu();
   }
 
   console.log("High-cost activities:");
   expensive.forEach((activity: Activity) => {
     console.log(`${activity.name} - ${activity.activityCost}`);
   });
+
+  // run main menu again
+	return await mainMenu();
 };
