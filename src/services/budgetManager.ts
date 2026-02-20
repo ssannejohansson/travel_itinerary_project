@@ -6,7 +6,6 @@ export const calculateTotalCost = (trip: Trip): number => {
     const baseCost = Cost[trip.destination as keyof typeof Cost];
 	const activitiesTotal = trip.activities.reduce((sum, activity) => sum + activity.activityCost, 0);
     return baseCost + activitiesTotal;
-	return trip.activities.reduce((sum, activity) => sum + activity.activityCost, 0);
 };
 
 // Returns all activities with a cost greater than or equal to the given threshold
