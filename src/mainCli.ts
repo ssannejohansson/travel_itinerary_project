@@ -87,7 +87,7 @@ export const mainMenu = async (): Promise<void> => {
 				color("green", `Total cost: ${totalCost} kr. === Goodbye! ===`),
 			);
 		} else if (answers.action === "View Trips") {
-			countryMenu(user); // add user as an argument
+			await countryMenu(user); // add user as an argument
 		} else if (answers.action === "Add Activity") {
 			activityMenu(user, activityCounter);
 			activityCounter++;
