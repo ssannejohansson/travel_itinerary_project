@@ -10,7 +10,7 @@ import { type Trip } from "./types/types.js";
 let activityCounter = 0; // track the number of activities
 
 /**
- * User object to store data
+ * User object to store data when program is running
  * type Trip from ./models
  */
 export const user: Trip = {
@@ -53,7 +53,7 @@ export const mainMenu = async (): Promise<void> => {
 					"View Trips",
 					"Add Activity",
 					"View Budget",
-					"Insert max budget",
+					//"Insert max budget",
 					"Exit",
 				],
 			},
@@ -63,29 +63,7 @@ export const mainMenu = async (): Promise<void> => {
 
 		if (answers.action === "Exit") {
 			// Exit the program and print out user information
-			// TODO:(Save user to database: db.json)
-			let totalCost: number = user.cost;
-
-			console.log(
-				color(
-					"green",
-					`Have a nice trip to ${user.destination} - ${user.startDate}.`,
-				),
-			);
-
-			console.log(`${user.destination} - ${user.cost} kr`);
-			user.activities.forEach((activity) => {
-				if (activity.name !== "No activity set") {
-					console.log(
-						`${activity.name} - ${activity.activityCost} kr`,
-					);
-					totalCost += activity.activityCost;
-				}
-			});
-
-			console.log(
-				color("green", `Total cost: ${totalCost} kr. === Goodbye! ===`),
-			);
+			exitMessage();
 		} else if (answers.action === "View Trips") {
 			await countryMenu(user); // add user as an argument
 		} else if (answers.action === "Add Activity") {
@@ -106,4 +84,30 @@ export const mainMenu = async (): Promise<void> => {
 		}
 	}
 };
+
+// Exit message with colorful info on the trip, cost and date.
+function exitMessage() {
+	let totalCost: number = user.cost;
+
+	console.log(
+		color(
+			"green",
+			`Have a nice trip to ${user.destination} - ${user.startDate}.`,
+		),
+	);
+
+	console.log(`${user.destination} - ${user.cost} kr`);
+	user.activities.forEach((activity) => {
+		if (activity.name !== "No activity set") {
+			console.log(`${activity.name} - ${activity.activityCost} kr`);
+			totalCost += activity.activityCost;
+		}
+	});
+
+	console.log(
+		color("green", `Total cost: ${totalCost} kr. === Goodbye! ===`),
+	);
+}
+
+// start the program
 mainMenu();
