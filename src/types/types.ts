@@ -3,6 +3,7 @@ export type Activity = {
 	name?: string; // optional
 	activityCost: number;
 	category: "food" | "transport" | "sightseeing" | "no activity";
+	date: string;
 	startTime: string;
 };
 

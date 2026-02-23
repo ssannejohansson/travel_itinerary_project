@@ -7,7 +7,7 @@ import { color } from "./services/formatUtils.js";
 import { type Trip } from "./types/types.js";
 
 // Globals
-let activityCounter = 0; // track the number of activities
+ //let activityCounter = 0; // track the number of activities
 
 /**
  * User object to store data when program is running
@@ -17,18 +17,11 @@ export const user: Trip = {
 	cost: 0,
 	destination: "No destination set",
 	startDate: "No date set",
-	activities: [
-		{
-			name: "No activity set",
-			activityCost: 0,
-			category: "no activity",
-			startTime: "No date set",
-		},
-	],
+	activities: [],
 };
 
 // Function to add one more new activity
-const addNewActivity = (user: Trip): void => {
+/*const addNewActivity = (user: Trip): void => {
 	user.activities?.push({
 		name: "No activity set",
 		activityCost: 0,
@@ -36,7 +29,7 @@ const addNewActivity = (user: Trip): void => {
 		startTime: "No date set",
 	});
 };
-
+ */
 /**
  * Main menu show trips, activity, budget, options.
  *** Start of the program ***
@@ -67,9 +60,10 @@ export const mainMenu = async (): Promise<void> => {
 		} else if (answers.action === "View Trips") {
 			await countryMenu(user); // add user as an argument
 		} else if (answers.action === "Add Activity") {
-			activityMenu(user, activityCounter);
-			activityCounter++;
-			addNewActivity(user);
+			activityMenu(user);
+			//activityMenu(user, activityCounter);
+			//activityCounter++;
+			//addNewActivity(user);
 		} else if (answers.action === "View Budget") {
 			viewBudgetMenu(user);
 		} else if (answers.action === "Insert max budget") {
