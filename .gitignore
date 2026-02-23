@@ -140,3 +140,10 @@ vite.config.ts.timestamp-*
 
 # mac files
 .DS_Store
+
+node_modules/
+dist/
+.vscode/
+.vs/
+*.log
+*.vsidx
