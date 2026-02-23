@@ -4,7 +4,6 @@ import { type Country } from "../types/types.js";
 // Print country information with colors
 export const printCountryInfo = (countryInfo: Country) => {
 	console.log(color("magenta", "*".repeat(30)));
-
 	console.log(color("yellow", `Destination: ${countryInfo.name.common}`));
 	console.log(color("yellow", `Capital: ${countryInfo.capital}`));
 	console.log(
@@ -20,7 +19,5 @@ export const printCountryInfo = (countryInfo: Country) => {
 		);
 	}
 	console.log(color("yellow", `Flag: ${countryInfo.flag}`));
-	//console.log(color("green", `Currency: ${countryInfo.currencies[0].name}`));
-
 	console.log(color("magenta", "*".repeat(30)));
 };
