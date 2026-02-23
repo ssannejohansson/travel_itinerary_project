@@ -27,9 +27,7 @@ export const countryMenu = async (user: Trip): Promise<void> => {
 		// Selected country
 		const countryInfo = await getDestinationtInfo(countrys.selectCountry);
 
-		/**
-		 * Add data to user object
-		 */
+		//Add data to user object
 		if (Array.isArray(countryInfo) && countryInfo[0]) {
 			// Store date to user object
 			user.destination = countryInfo[0].name.common;
@@ -39,20 +37,15 @@ export const countryMenu = async (user: Trip): Promise<void> => {
 			printCountryInfo(countryInfo[0]);
 			console.log(
 				color(
-					// add color to string
 					"green",
 					`Trip to ${countryInfo[0].name.common} is going to cost ${user.cost} kr`,
 				),
 			);
-			// test
-			// console.log(color("red", "user information so far: "), user);
-
 			// run date-menu to set travel date
 			dateMenu(user);
 		} else {
 			console.log("Country information not found");
 		}
-		// Handle errors
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error("Menu error:", error.message);
