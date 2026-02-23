@@ -1,5 +1,7 @@
 import inquirer from "inquirer";
 import type { Trip, Activity } from "../types/types.js";
+import { mainMenu } from "../mainCli.js";
+import { ActivityCost } from "../types/types.js";
 import {
   addActivity,
   getActivitiesByDate,
@@ -14,15 +16,9 @@ export const activityMenu = async (trip: Trip): Promise<void> => {
 
   while (!exit) {
     const { action } = await inquirer.prompt<{ action: string }>({
-      type: "list",
+      type: "rawlist",
       name: "action",
-        message: `Select one:
-       ******************************
- * 1. Add Activity, 
- * 2. View Activity for Specific Day, 
- * 3. Filter Activity by Category,
- * 4. Full Itinerary
-    *******************************`,
+        message: `Select one:`,
       choices: [
         "Add Activity",
         "View Activities by Date",
@@ -33,23 +29,23 @@ export const activityMenu = async (trip: Trip): Promise<void> => {
     });
 
     switch (action) {
-        //case "Add Activity":
-        case "1":
+        case "Add Activity":
+    
             console.log(color("green", "*** Add New Activity ***"));
             await handleAddActivity(trip);
             break;
 
-        case "2":
+        case "View Activities by Date":
             console.log(color("green", "*** View Activity for Specific Day ***"));
             await handleViewByDate(trip);
             break;
 
-        case "3":
+        case "Filter by Category":
             console.log(color("green", "*** Filter Activity By Category ***"));
             await handleFilterByCategory(trip);
             break;
 
-        case "4":
+        case "View Full Itinerary":
             console.log(color("green", "Show Full Itinerary ***"));
             await handleFullItinerary(trip);
             break;
@@ -58,7 +54,8 @@ export const activityMenu = async (trip: Trip): Promise<void> => {
         exit = true;
         break;
     }
-  }
+    }
+    await mainMenu();
 };
 
 // Add New activity
@@ -72,23 +69,24 @@ const handleAddActivity = async (trip: Trip): Promise<void> => {
     startTime: string;
   }>([
     { type: "input", name: "name", message: "Activity name:" },
-    { type: "input", name: "activityCost", message: "Cost (kr):" },
+  // { type: "input", name: "activityCost", message: "Cost (kr):" },
     {
-      type: "list",
+      type: "rawlist",
       name: "category",
-        message:`Type one Category:
-       ******************************
- * food,transport,sightseeing,no activity *
-    *******************************`        ,
+        message:`Select Category:`,
       choices: ["food", "transport", "sightseeing", "no activity"],
     },
     { type: "input", name: "date", message: "Date (YYYY-MM-DD):" },
     { type: "input", name: "startTime", message: "Time (HH:mm):" },
   ]);
 
+    // ?? Get cost from enum-like object
+    const cost =
+        answers.category !== "no activity" ? ActivityCost[answers.category] : 0;
+
   const activity: Activity = {
     name: answers.name || "Unnamed Activity",
-    activityCost: Number(answers.activityCost),
+    activityCost: cost,
     category: answers.category,
     date: answers.date,
     startTime: answers.startTime,
@@ -128,10 +126,7 @@ const handleFilterByCategory = async (trip: Trip): Promise<void> => {
     {
       type: "list",
       name: "category",
-      message:`Type one Category:
-       ******************************
- * food,transport,sightseeing,no activity *
-    *******************************`  ,
+      message:`Select Category:`  ,
       choices: ["food", "transport", "sightseeing"],
     },
   ]);
