@@ -21,25 +21,16 @@ export const dateMenu = async (user: Trip): Promise<void> => {
 				choices: [`${addWeeks(1)}`, `${addWeeks(2)}`, `${addWeeks(3)}`],
 			},
 		]);
-		/**
-		 * TODO - Add data to user
-		 */
 
 		// Store date to user object
 		user.startDate = travelDate.selectDate;
-		//user.activities[user.activities.length - 1].startTime =
-		//	travelDate.selectDate; // same date for activities and trip
 
 		// Print out travel date in green
 		console.log(
 			color("green", `Your travel date: ${travelDate.selectDate}`),
 		);
-		// test
-		// console.log(color("red", "user information so far: "), user);
-
-		// run main menu again
+		// Back to main menu again
 		mainMenu();
-		// Handle errors
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error("Menu error:", error.message);

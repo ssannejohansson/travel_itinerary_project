@@ -2,17 +2,10 @@ import inquirer from "inquirer";
 import { countryMenu } from "./cliHandlers/destinationCLI.js";
 import { activityMenu } from "./cliHandlers/activityCLI.js";
 import { viewBudgetMenu } from "./cliHandlers/viewBudgetCLI.js";
-import { maxBudgetMenu } from "./cliHandlers/maxBudgetCLI.js";
 import { color } from "./services/formatUtils.js";
 import { type Trip } from "./types/types.js";
 
-// Globals
- //let activityCounter = 0; // track the number of activities
-
-/**
- * User object to store data when program is running
- * type Trip from ./models
- */
+//User object to store data when program is running
 export const user: Trip = {
 	cost: 0,
 	destination: "No destination set",
@@ -20,19 +13,9 @@ export const user: Trip = {
 	activities: [],
 };
 
-// Function to add one more new activity
-/*const addNewActivity = (user: Trip): void => {
-	user.activities?.push({
-		name: "No activity set",
-		activityCost: 0,
-		category: "no activity",
-		startTime: "No date set",
-	});
-};
- */
 /**
  * Main menu show trips, activity, budget, options.
- *** Start of the program ***
+ * *** Start of the program ***
  */
 export const mainMenu = async (): Promise<void> => {
 	try {
@@ -42,13 +25,7 @@ export const mainMenu = async (): Promise<void> => {
 				type: "select",
 				name: "action",
 				message: "What would you like to do?",
-				choices: [
-					"View Trips",
-					"Add Activity",
-					"View Budget",
-					//"Insert max budget",
-					"Exit",
-				],
+				choices: ["View Trips", "Add Activity", "View Budget", "Exit"],
 			},
 		]);
 
@@ -58,16 +35,11 @@ export const mainMenu = async (): Promise<void> => {
 			// Exit the program and print out user information
 			exitMessage();
 		} else if (answers.action === "View Trips") {
-			await countryMenu(user); // add user as an argument
+			await countryMenu(user);
 		} else if (answers.action === "Add Activity") {
 			activityMenu(user);
-			//activityMenu(user, activityCounter);
-			//activityCounter++;
-			//addNewActivity(user);
 		} else if (answers.action === "View Budget") {
 			viewBudgetMenu(user);
-		} else if (answers.action === "Insert max budget") {
-			maxBudgetMenu();
 		}
 	} catch (error) {
 		// Handle errors
@@ -79,17 +51,15 @@ export const mainMenu = async (): Promise<void> => {
 	}
 };
 
-// Exit message with colorful info on the trip, cost and date.
+// Exit message with colorful info on the trip, cost, activities and date.
 function exitMessage() {
 	let totalCost: number = user.cost;
-
 	console.log(
 		color(
 			"green",
 			`Have a nice trip to ${user.destination} - ${user.startDate}.`,
 		),
 	);
-
 	console.log(`${user.destination} - ${user.cost} kr`);
 	user.activities.forEach((activity) => {
 		if (activity.name !== "No activity set") {
@@ -97,7 +67,6 @@ function exitMessage() {
 			totalCost += activity.activityCost;
 		}
 	});
-
 	console.log(
 		color("green", `Total cost: ${totalCost} kr. === Goodbye! ===`),
 	);
